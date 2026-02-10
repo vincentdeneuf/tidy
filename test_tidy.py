@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 # This is a header comment that should be removed with --header
 
 """This is a module docstring that should be removed with tidy docstrings."""

@@ -3,7 +3,6 @@
 import argparse
 import os
 import sys
-from pathlib import Path
 
 import libcst as cst
 
@@ -48,7 +47,7 @@ def process_file(file_path: str, remove_prints: bool = False, remove_comments: b
         comment_options = {}
     
     try:
-        with open(file_path, "r", encoding="utf-8") as f:
+        with open(file_path, encoding="utf-8") as f:
             source_code = f.read()
         
         module = cst.parse_module(source_code)

@@ -29,5 +29,16 @@ tidy = "tidy.main:main"
 [tool.setuptools.packages.find]
 where = ["src"]
 
-[tool.setuptools.package-dir]
-"" = "src"
+[dependency-groups]
+dev = [
+    "build>=1.4.0",
+    "ruff>=0.15.0",
+    "twine>=6.2.0",
+]
+
+[tool.ruff]
+line-length = 88
+target-version = "py39"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP"]
