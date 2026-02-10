@@ -160,6 +160,13 @@ def main() -> int:
         
         # Require at least one flag
         if not any(comment_flags.values()):
+            print("Error: tidy comments requires at least one flag")
+            print("Available flags:")
+            print("  --default   Remove inline comments only (preserve noqa, type:, pragma)")
+            print("  --inline    Remove all inline comments, including noqa, type, pragma")
+            print("  --leading   Remove standalone/full-line comments")
+            print("  --header    Remove shebang & coding comments")
+            print("  --all       Remove all types of comments")
             return 1
     
     # Validate log options
@@ -178,6 +185,17 @@ def main() -> int:
         
         # Require at least one flag
         if not any(log_flags.values()):
+            print("Error: tidy logs requires at least one flag")
+            print("Available flags:")
+            print("  --trace      Remove trace level logs")
+            print("  --debug      Remove debug level logs")
+            print("  --info       Remove info level logs")
+            print("  --warning    Remove warning level logs")
+            print("  --success    Remove success level logs")
+            print("  --error      Remove error level logs")
+            print("  --exception  Remove exception level logs")
+            print("  --critical   Remove critical level logs")
+            print("  --all        Remove all log levels")
             return 1
     
     # Determine what to remove
@@ -286,15 +304,15 @@ def main() -> int:
     
     # Print summary
     if remove_prints:
-        pass
+        print(f"{total_prints_removed} prints removed from {files_with_prints} files")
     if remove_comments:
-        pass
+        print(f"{total_comments_removed} comments removed from {files_with_comments} files")
     if remove_docstrings:
-        pass
+        print(f"{total_docstrings_removed} docstrings removed from {files_with_docstrings} files")
     if remove_asserts:
-        pass
+        print(f"{total_asserts_removed} asserts removed from {files_with_asserts} files")
     if remove_logs:
-        pass
+        print(f"{total_logs_removed} logs removed from {files_with_logs} files")
     
     return 0
 
