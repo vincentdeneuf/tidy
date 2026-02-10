@@ -57,8 +57,7 @@ class InlineCommentRemover(cst.CSTTransformer):
             comment_text = updated_node.comment.value
 
             if not self.remove_all and any(
-                keyword in comment_text
-                for keyword in ["noqa", "type:", "pragma"]
+                keyword in comment_text for keyword in ["noqa", "type:", "pragma"]
             ):
                 return updated_node
 
@@ -200,10 +199,7 @@ class AssertRemover(cst.CSTTransformer):
         original_node: cst.SimpleStatementLine,
         updated_node: cst.SimpleStatementLine,
     ):
-        if (
-            len(updated_node.body) == 1
-            and isinstance(updated_node.body[0], cst.Assert)
-        ):
+        if len(updated_node.body) == 1 and isinstance(updated_node.body[0], cst.Assert):
             self.removed_count += 1
             return remove_statement_preserve_comments(original_node)
 
