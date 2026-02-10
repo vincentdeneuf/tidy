@@ -21,14 +21,12 @@ def example_function():
     log.info("This is an info log")
     log.warning("This is a warning log")
     log.success("This is a success log")
-    log.error("This is an error log")
     log.exception("This is an exception log")
     log.critical("This is a critical log")
     
     # More logging with different base names
     logger.debug("Logger debug message")
     logger.info("Logger info message")
-    logging.error("Logging error message")
     logging.warning("Logging warning message")
     
     # These should NOT be removed (not standalone expressions)

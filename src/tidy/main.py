@@ -127,7 +127,7 @@ def main() -> int:
     """Main entry point for the tidy CLI."""
     parser = argparse.ArgumentParser(description="Remove print statements, comments, docstrings, asserts, and logs from Python files.")
     parser.add_argument("command", choices=["comments", "prints", "docstrings", "asserts", "logs"], help="What to remove")
-    parser.add_argument("--verbose", "-v", action="store_true", help="Show per-file changes")
+    parser.add_argument("--quiet", "-q", action="store_true", help="Suppress per-file output (verbose is default)")
     
     # Comment-specific options
     parser.add_argument("--inline", action="store_true", help="Remove all inline comments, including noqa, type, pragma")
@@ -160,13 +160,6 @@ def main() -> int:
         
         # Require at least one flag
         if not any(comment_flags.values()):
-            print("Error: tidy comments requires at least one flag")
-            print("Available flags:")
-            print("  --inline    Remove all inline comments, including noqa, type, pragma")
-            print("  --leading   Remove standalone/full-line comments")
-            print("  --header    Remove shebang & coding comments")
-            print("  --default   Remove inline comments only (preserve noqa, type:, pragma)")
-            print("  --all       Remove all types of comments")
             return 1
     
     # Validate log options
@@ -185,17 +178,6 @@ def main() -> int:
         
         # Require at least one flag
         if not any(log_flags.values()):
-            print("Error: tidy logs requires at least one flag")
-            print("Available flags:")
-            print("  --trace      Remove trace level logs")
-            print("  --debug      Remove debug level logs")
-            print("  --info       Remove info level logs")
-            print("  --warning    Remove warning level logs")
-            print("  --success    Remove success level logs")
-            print("  --error      Remove error level logs")
-            print("  --exception  Remove exception level logs")
-            print("  --critical   Remove critical level logs")
-            print("  --all        Remove all log levels")
             return 1
     
     # Determine what to remove
@@ -258,6 +240,9 @@ def main() -> int:
     files_with_asserts = 0
     files_with_logs = 0
     
+    # Verbose is default, quiet mode suppresses per-file output
+    verbose_mode = not args.quiet
+    
     # Process each file
     for file_path in python_files:
         prints_removed, comments_removed, docstrings_removed, asserts_removed, logs_removed = process_file(
@@ -267,44 +252,49 @@ def main() -> int:
         if prints_removed > 0:
             files_with_prints += 1
             total_prints_removed += prints_removed
-            if args.verbose:
-                print(f"{file_path}  {prints_removed} prints removed")
+            if verbose_mode:
+                relative_path = os.path.relpath(file_path, ".")
+                print(f"{prints_removed} prints removed\t\t\033[90m{relative_path}\033[0m")
         
         if comments_removed > 0:
             files_with_comments += 1
             total_comments_removed += comments_removed
-            if args.verbose:
-                print(f"{file_path}  {comments_removed} comments removed")
+            if verbose_mode:
+                relative_path = os.path.relpath(file_path, ".")
+                print(f"{comments_removed} comments removed\t\t\033[90m{relative_path}\033[0m")
         
         if docstrings_removed > 0:
             files_with_docstrings += 1
             total_docstrings_removed += docstrings_removed
-            if args.verbose:
-                print(f"{file_path}  {docstrings_removed} docstrings removed")
+            if verbose_mode:
+                relative_path = os.path.relpath(file_path, ".")
+                print(f"{docstrings_removed} docstrings removed\t\t\033[90m{relative_path}\033[0m")
         
         if asserts_removed > 0:
             files_with_asserts += 1
             total_asserts_removed += asserts_removed
-            if args.verbose:
-                print(f"{file_path}  {asserts_removed} asserts removed")
+            if verbose_mode:
+                relative_path = os.path.relpath(file_path, ".")
+                print(f"{asserts_removed} asserts removed\t\t\033[90m{relative_path}\033[0m")
         
         if logs_removed > 0:
             files_with_logs += 1
             total_logs_removed += logs_removed
-            if args.verbose:
-                print(f"{file_path}  {logs_removed} logs removed")
+            if verbose_mode:
+                relative_path = os.path.relpath(file_path, ".")
+                print(f"{logs_removed} logs removed\t\t\033[90m{relative_path}\033[0m")
     
     # Print summary
     if remove_prints:
-        print(f"{total_prints_removed} prints removed from {files_with_prints} files")
+        pass
     if remove_comments:
-        print(f"{total_comments_removed} comments removed from {files_with_comments} files")
+        pass
     if remove_docstrings:
-        print(f"{total_docstrings_removed} docstrings removed from {files_with_docstrings} files")
+        pass
     if remove_asserts:
-        print(f"{total_asserts_removed} asserts removed from {files_with_asserts} files")
+        pass
     if remove_logs:
-        print(f"{total_logs_removed} logs removed from {files_with_logs} files")
+        pass
     
     return 0
 
