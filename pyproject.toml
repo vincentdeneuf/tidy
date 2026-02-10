@@ -7,21 +7,36 @@ name = "tidy"
 version = "0.1.0"
 description = "A CLI tool named tidy"
 readme = "README.md"
-license = {text = "MIT"}
-authors = [
-    {name = "Author", email = "author@example.com"}
-]
-classifiers = [
-    "Development Status :: 3 - Alpha",
-    "Intended Audience :: Developers",
-    "License :: OSI Approved :: MIT License",
-    "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.11",
-    "Programming Language :: Python :: 3.12",
-    "Programming Language :: Python :: 3.13",
-]
+license = { text = "MIT" }
 requires-python = ">=3.11"
-dependencies = ["libcst"]
+
+authors = [
+  { name = "vincentdeneuf", email = "0189vn@gmail.com" },
+]
+
+dependencies = [
+  "libcst",
+]
+
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: Software Development :: Libraries :: Python Modules",
+  "Topic :: Software Development :: Code Generators",
+]
+
+keywords = ["cli", "code", "formatting", "refactor", "ast"]
+
+[project.urls]
+Homepage = "https://github.com/vincentdeneuf/tidy"
+Repository = "https://github.com/vincentdeneuf/tidy"
+Issues = "https://github.com/vincentdeneuf/tidy/issues"
 
 [project.scripts]
 tidy = "tidy.main:main"
@@ -31,9 +46,9 @@ where = ["src"]
 
 [dependency-groups]
 dev = [
-    "build>=1.4.0",
-    "ruff>=0.15.0",
-    "twine>=6.2.0",
+  "build>=1.4.0",
+  "ruff>=0.15.0",
+  "twine>=6.2.0",
 ]
 
 [tool.ruff]

@@ -1,1 +1,1 @@
-"""Tests for swiper."""
+"""Tests for tidy."""

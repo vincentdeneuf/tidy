@@ -1,4 +1,4 @@
 include LICENSE
 include README.md
-recursive-include src/swiper *.py
+recursive-include src/tidy *.py
 recursive-include tests *.py
