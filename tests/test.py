@@ -17,7 +17,6 @@ def example_function():
     
     # Logging statements that should be removed with tidy logs
     log.trace("This is a trace log")
-    log.debug("This is a debug log")
     log.info("This is an info log")
     log.warning("This is a warning log")
     log.success("This is a success log")
@@ -25,7 +24,6 @@ def example_function():
     log.critical("This is a critical log")
     
     # More logging with different base names
-    logger.debug("Logger debug message")
     logger.info("Logger info message")
     logging.warning("Logging warning message")
     
@@ -48,7 +46,6 @@ class ExampleClass:
         
         # Logging in method
         log.info("Method log message")
-        logger.debug("Method logger debug")
         
         return 42
 
